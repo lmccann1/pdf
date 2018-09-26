@@ -1,0 +1,25 @@
+{
+  "name": "lbp-react-table",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "express-busboy": "^7.0.0",
+    "gridfs-stream": "^1.1.1",
+    "mongodb": "^3.1.6",
+    "react": "^16.5.2",
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.5.2",
+    "react-pdf": "^3.0.5",
+    "react-pdf-reader": "^0.1.8",
+    "react-scripts": "1.1.5",
+    "react-table": "^6.8.6"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
