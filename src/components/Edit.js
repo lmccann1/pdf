@@ -10,12 +10,11 @@ class Edit extends Component {
         this.findID = this.findID.bind(this);
 
         this.state = {
-            id: '',
+          //  id: '',
             filename: '',
             summary: '',
             date: ''
         }
-
     }
     handleChange(e) {
         this.setState({
@@ -33,6 +32,7 @@ class Edit extends Component {
       e.preventDefault();
 
         const update = {
+            //id: this.state.id,
             filename: this.state.filename,
             summary: this.state.summary,
             date: this.state.date
@@ -40,7 +40,7 @@ class Edit extends Component {
         axios.put('http://localhost:69/update/'+this.state.id, update).then(res => console.log(res.data));
 
         this.setState({
-            id: '',
+          //  id: '',
             filename: '',
             summary: '',
             date: ''
@@ -50,13 +50,24 @@ class Edit extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.onSubmit}>
+                <h3 align="center">Edit File</h3>
+                <hr/>
+                <form onSubmit={e => this.onSubmit(e)}>
                     <label>Title: </label>
-                    <input type="text" name="filename"  onChange={this.handleChange} />
+                    <br/>
+                    <input type="text" name="filename" value={this.state.filename}  onChange={this.handleChange} />
+                    <br/>
+                    <br/>
                     <label>Summary: </label>
-                    <input type="text" name="summary" onChange={this.handleChange} />
+                    <br/>
+                    <input type="text" name="summary" value={this.state.summary} onChange={this.handleChange} />
+                    <br/>
+                    <br/>
                     <label>Date: </label>
-                    <input type="text" name="date" onChange={this.handleChange}/>
+                    <br/>
+                    <input type="text" name="date"  value={this.state.date} onChange={this.handleChange}/>
+                    <br/>
+                    <br/>
                     <input type="submit" value="Update"/>
                 </form>
             </div>
