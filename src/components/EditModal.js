@@ -1,68 +1,51 @@
-import {Component} from "react";
-import {Button} from "react-bootstrap";
-import NavBar from "./NavBar";
-import Modal from "react-bootstrap/es/Modal";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Edit from "./Edit";
-//import ReactTable from "react-table";
-import React from "react";
-
-const customStyles = {
-    content : {
-        top                   : '50%',
-        left                  : '50%',
-        right                 : 'auto',
-        bottom                : 'auto',
-        marginRight           : '-50%',
-        transform             : 'translate(-50%, -50%)'
-    }
-};
 
 class EditModal extends Component {
-    constructor(props){
-        super(props);
-
-        this.state = {
-            modalIsOpen: false
-        };
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-    }
-    openModal() {
-        this.setState({modalIsOpen: true});
-    }
-    closeModal(){
-        this.setState({modalIsOpen: false});
-    }
-
     render() {
-        return (
-            <div>
-                <NavBar/>
-                <Button bsStyle="primary" onClick={
-                    this.openModal} >Edit
-                </Button>
-                <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}
-                    contentLabel="Edit"
-                >
-                    <Edit/>
-                </Modal>
 
-                {/*<ReactTable*/}
-                    {/*columns={columns}*/}
-                    {/*data={this.state.posts}*/}
-                    {/*filterable*/}
-                    {/*defaultPageSize={10}*/}
-                    {/*noDataText={"No results found"}*/}
-                {/*>*/}
-                {/*</ReactTable>*/}
-                <pdf />
+        if(!this.props.show) {
+            return null;
+        }
+
+        const backdropStyle = {
+            position: 'fixed',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: 'rgba(0,0,0,0.3)',
+            padding: 50
+        };
+
+        const modalStyle = {
+            backgroundColor: '#fff',
+            borderRadius: 5,
+            maxWidth: 500,
+            minHeight: 300,
+            margin: '0 auto',
+            padding: 30
+        };
+
+        return (
+            <div className="backdrop" style={{backdropStyle}}>
+                <div className="modal" style={{modalStyle}}>
+                    {this.props.children}
+                    <div className="footer">
+                        <button onClick={this.props.onClose}>
+                            Close
+                        </button>
+                    </div>
+                </div>
+                <Edit/>
             </div>
         );
     }
 }
-
+EditModal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    show: PropTypes.bool,
+    children: PropTypes.node
+};
 export default EditModal;

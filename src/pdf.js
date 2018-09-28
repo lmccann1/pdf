@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Document, Page } from "react-pdf";
+import { Page } from "react-pdf";
 //import Pages from "./components/pages";
 import "pdfjs-dist/web/pdf_viewer.css";
 import "react-pdf-reader/dist/TextLayerBuilder.css";
