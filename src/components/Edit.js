@@ -7,12 +7,11 @@ class Edit extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.findID = this.findID.bind(this);
 
         this.state = {
-          //  id: '',
-            filename: '',
-            summary: '',
+            id: this.props.id,
+            filename: this.props.filename,
+            summary: this.props.summary,
             date: ''
         }
     }
@@ -23,16 +22,11 @@ class Edit extends Component {
         console.log(e.target.name)
 
     }
-    findID(passId) {
-        this.setState({
-            id: passId
-        })
-    }
     onSubmit(e) {
       e.preventDefault();
 
         const update = {
-            //id: this.state.id,
+            id: this.state.id,
             filename: this.state.filename,
             summary: this.state.summary,
             date: this.state.date
@@ -40,7 +34,7 @@ class Edit extends Component {
         axios.put('http://localhost:69/update/'+this.state.id, update).then(res => console.log(res.data));
 
         this.setState({
-          //  id: '',
+            id: '',
             filename: '',
             summary: '',
             date: ''

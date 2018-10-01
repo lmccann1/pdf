@@ -19,7 +19,7 @@
     "react-modal": "^3.6.1",
     "react-pdf": "^3.0.5",
     "react-pdf-reader": "^0.1.8",
-    "react-scripts": "1.1.5",
+    "react-scripts": "^1.1.5",
     "react-table": "^6.8.6",
     "react-tag-input": "^5.2.2"
   },

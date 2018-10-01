@@ -37,11 +37,12 @@ class App extends Component {
     super(props);
     this.state = {
       posts: [],
+      id: this.props.id,
+      filename: this.props.filename,
         modalIsOpen:false,
         modal2IsOpen: false
     }
     this.state = { isOpen: false };
-   // this.onClick = this.onClick.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.openModal2 = this.openModal2.bind(this);
@@ -53,7 +54,11 @@ class App extends Component {
   closeModal() {
       this.setState ({ modalIsOpen:false })
   }
-  openModal2() {
+  openModal2(id, filename) {
+      console.log(id, filename)
+      //this.state.id = this.state.id.bind(this);
+      this.setState({id:id})
+      this.setState({filename: filename})
       this.setState ({ modal2IsOpen:true })
   }
   closeModal2() {
@@ -71,6 +76,11 @@ class App extends Component {
       const index = this.state.posts.filter((row) => row.id !== id);
       this.setState({posts: index})
       console.log("Id", id)
+  }
+  editRow(id, filename){
+
+      this.openModal2(id, filename);
+      console.log(id, filename);
   }
   render() {
       const columns = [
@@ -115,8 +125,11 @@ class App extends Component {
               Header: "Edit",
               Cell: props =>{
                   return(
-                      <Button bsStyle="primary" onClick=
-                          {this.openModal2}>Edit</Button>
+                      <Button bsStyle="primary" onClick={() =>{
+                          this.editRow(props.original.id, props.original.filename, props.original.metadata.summary);
+                      }}>Edit
+                      </Button>
+
                   )
               },
               sortable:false,
@@ -157,7 +170,7 @@ class App extends Component {
                   isOpen = {this.state.modal2IsOpen}
                   onRequestClose = {this.closeModal2}
                   style = {customStyles2}>
-                  <Edit/>
+                  <Edit id={this.state.id} filename={this.state.filename} summary={this.state.summary}/>
               </Modal2>
               <ReactTable
                   columns={columns}
